@@ -1,0 +1,65 @@
+---
+title: "mongoimport_to_R"
+author: "Prashant B. Bhuyan"
+date: "October 31, 2014"
+output: pdf_document
+---
+
+
+# Problem 2: 
+
+
+
+```{r}
+# import rmongodb package
+library(rmongodb)
+# Create a connection to the rmongodb installation
+mongo <- mongo.create()
+mongo
+
+if(mongo.is.connected(mongo)==TRUE){
+  mongo.get.databases(mongo)
+  }
+
+if(mongo.is.connected(mongo)==TRUE){
+  db <- "unitedstatesdata"
+  mongo.get.database.collections(mongo,db)
+  
+  }
+coll <- "unitedstatesdata.us"
+
+
+if (mongo.is.connected(mongo) == TRUE) {
+    help("mongo.count")
+    mongo.count(mongo, coll)
+}
+
+if (mongo.is.connected(mongo) == TRUE) {
+    territory.df <- mongo.distinct(mongo, coll,"territory")
+}
+
+
+
+if (mongo.is.connected(mongo) == TRUE){
+    state.df <- mongo.distinct(mongo, coll, "state")
+  }
+
+
+
+if (mongo.is.connected(mongo) == TRUE){
+  
+  district.df <- mongo.distinct(mongo, coll, "federal_district")
+  }
+
+print("Territories: ")
+territory.df
+
+print("States: ")
+state.df
+
+print("Districts: ")
+district.df
+
+
+
+```
